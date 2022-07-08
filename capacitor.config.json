@@ -1,0 +1,23 @@
+{
+    "appId": "com.mypoppins.appmypoppins",
+    "appName": "My Poppins",
+    "bundledWebRuntime": false,
+    "npmClient": "npm",
+    "webDir": "www",
+    "plugins": {
+      "Keyboard": {
+        "resize": "ionic"
+      },
+      "SplashScreen": {
+        "launchShowDuration": 500,
+        "launchAutoHide": false,
+        "androidScaleType": "CENTER_CROP",
+        "splashFullScreen": false,
+        "splashImmersive": false,
+        "backgroundColor": "#f7991e",
+        "androidSplashResourceName": "splash"
+      }
+    },
+    "cordova": {}
+  }
+  

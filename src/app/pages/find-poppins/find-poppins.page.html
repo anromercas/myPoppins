@@ -1,0 +1,41 @@
+
+
+<app-header></app-header>
+
+
+<ion-content padding="false">
+
+  <ion-row>
+    <ion-col size="12">
+      <div class="card-wrapper" [style.height.px]="height-200">
+        <ion-card class="card" *ngFor="let p of people"
+        [style.background-image]="'url('+ p.image +')'"
+        [style.width.px]="width-30"
+        [style.height.px]="height-200">
+          <ion-card-header>
+            <!-- <ion-img [src]="p.image"></ion-img> -->
+            <ion-card-subtitle color="light" >{{p.name}}, {{p.age}} </ion-card-subtitle>
+            <ion-card-title color="light" >{{p.name}}, {{p.age}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </div>
+    </ion-col>
+  </ion-row>
+
+<div class="button_box">
+  <ion-button class="small_button" mode="ios" shape="round" fill="outline" >
+    <ion-icon color="warning" name="refresh"></ion-icon>
+  </ion-button>
+  <ion-button (click)="swipeleft()" mode="ios" class="large_button" shape="round" fill="outline" >
+    <ion-icon color="danger" name="close"></ion-icon>
+  </ion-button>
+  <div class="space"></div>
+  <ion-button (click)="swiperight()" mode="ios" class="large_button" shape="round" fill="outline">
+    <ion-icon color="success" name="heart"></ion-icon>
+  </ion-button>
+  <ion-button class="small_button" mode="ios" shape="round" fill="outline">
+    <ion-icon color="primary" name="location-sharp"></ion-icon>
+  </ion-button>
+</div>
+
+</ion-content>
