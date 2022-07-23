@@ -40,6 +40,7 @@ export class HomePage implements AfterViewInit{
   width: any;
   height: number;
   cardArray: any;
+  cardShowen: any;
 
   constructor(private platform: Platform, 
               public gestureCtrl: GestureController,
@@ -54,12 +55,14 @@ export class HomePage implements AfterViewInit{
 
   ngAfterViewInit() {
     this.cardArray = this.cards.toArray();
+    this.cardShowen = this.cardArray[this.cardArray.length - 1];
     this.useTinderSwipe();
   }
 
   useTinderSwipe() {
     for ( let i = 0; i < this.cardArray.length; i++ ) {
       const card = this.cardArray[i];
+      this.cardShowen = card;
       const gesture = this.gestureCtrl.create({
         el: card.nativeElement,
         gestureName: 'my-gesture',
@@ -74,9 +77,10 @@ export class HomePage implements AfterViewInit{
 
           if(ev.deltaX > 150) {
             card.nativeElement.style.transform = `translateX(${+this.platform.width() * 2}px) rotate(${ev.deltaX / 2}deg)`;
-
+            this.deleteLastItemCardArray();
           } else if (ev.deltaX < -150 ) {
             card.nativeElement.style.transform = `translateX(-${+this.platform.width() * 2}px) rotate(${ev.deltaX / 2}deg)`;
+            this.deleteLastItemCardArray();
           } else {
             card.nativeElement.style.transform = '';
           }
@@ -87,49 +91,26 @@ export class HomePage implements AfterViewInit{
   }
 
   swipeleft() {
-    
-
-    for ( let i = 0; i < this.cardArray.length; i++ ) {
-      const card = this.cardArray[i];
-      const animation: Animation = this.animationCtrl.create()
-            .addElement(card.nativeElement)
-            .duration(1000)
-            .fromTo('transform', 'translateX(0)', `translateX(${-100}px)`);
-      // animation.play();
-
-      const animation2: Animation = this.animationCtrl.create()
-            .addElement(card.nativeElement)
-            .duration(1000)
-            .to('rotate', `rotate(${-100 / 10}deg)`);
-            
-      animation2.play();
-
-      const gesture = this.gestureCtrl.create({
-        el: card.nativeElement,
-        gestureName: 'my-gesture',
-        onMove: ev => {
-          card.nativeElement.style.transform = `translateX(${ev.deltaX}px) rotate(${ev.deltaX / 10}deg)`;
-        },
-        onEnd: ev => {
-          card.nativeElement.style.transition = '.5s ease-out';
-
-          if(ev.deltaX > 150) {
-            card.nativeElement.style.transform = `translateX(${+this.platform.width() * 2}px) rotate(${ev.deltaX / 2}deg)`;
-
-          } else if (ev.deltaX < -150 ) {
-            card.nativeElement.style.transform = `translateX(-${+this.platform.width() * 2}px) rotate(${ev.deltaX / 2}deg)`;
-          } else {
-            card.nativeElement.style.transform = '';
-          }
-        }
-      });
-  
-      gesture.enable();
+    for (let index = 0; index < this.platform.width()*2; index++) {
+      this.cardShowen.nativeElement.style.transform = `translateX(${-index}px) rotate(${-index / 10}deg)`;
+      this.cardShowen.nativeElement.style.transition = '.5s ease-out';
     }
+    this.deleteLastItemCardArray();
+    console.log(this.cardShowen.innerText)
   }
 
   swiperight() {
+    for (let index = 0; index < this.platform.width()*2; index++) {
+      this.cardShowen.nativeElement.style.transform = `translateX(${index}px) rotate(${index / 10}deg)`;
+      this.cardShowen.nativeElement.style.transition = '.5s ease-out';
+    }
+    this.deleteLastItemCardArray();
+    console.log(this.cardShowen.innerText)
+  }
 
+  deleteLastItemCardArray() {
+    this.cardArray.pop();
+    this.cardShowen = this.cardArray[this.cardArray.length - 1];
   }
 
 }
