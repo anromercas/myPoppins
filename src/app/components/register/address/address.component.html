@@ -1,0 +1,36 @@
+<ion-item class="ion-text-center item-steps">
+  <ion-label color="secondary">Paso 1 de 4</ion-label>
+</ion-item>
+
+<h3>¿Dónde vives?</h3>
+<h6 class="margin-bottom-0-rem">Para mostrar coincidencias en tu zona.</h6>
+<h6 class="margin-bottom-1-rem margin-top-0-rem">¡No se compartirá tu dirección!</h6>
+
+<ion-card>
+  <ion-card-content>
+    <form [formGroup]="addressForm">
+      <ion-item lines="none">
+        <ion-label position="stacked">Ciudad</ion-label>
+        <ion-input class="input-form" type="text" formControlName="city" ngDefaultControl></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="stacked">Calle</ion-label>
+        <ion-input class="input-form" type="text" formControlName="street" ngDefaultControl></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="stacked">Número</ion-label>
+        <ion-input class="input-form" type="number" formControlName="streetNumber" ngDefaultControl></ion-input>
+      </ion-item>
+    </form>
+  </ion-card-content>
+</ion-card>
+
+
+<ion-button [disabled]="addressForm.invalid" (click)="onClickNext()" color="warning" class="bold nextBtn" expand="block">
+  Siguiente
+  <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+</ion-button>
+<ion-button (click)="onClickPrev()" color="danger" class="bold" expand="block">
+  <ion-icon name="chevron-back-outline"></ion-icon>
+  Anterior
+</ion-button>

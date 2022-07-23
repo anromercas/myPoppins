@@ -13,6 +13,22 @@ const routes: Routes = [
         loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
       },
       {
+        path: 'list-home',
+        loadChildren: () => import('./list-home/list-home.module').then( m => m.ListHomePageModule)
+      },
+      {
+        path: 'chat',
+        loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
+      },
+      {
+        path: 'saved-profiles',
+        loadChildren: () => import('./saved-profiles/saved-profiles.module').then( m => m.SavedProfilesPageModule)
+      },
+      {
+        path: 'profile',
+        loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+      },
+      {
         path: 'profile',
         loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
       }
@@ -22,7 +38,7 @@ const routes: Routes = [
     path: '',
     redirectTo: 'dashboard/home',
     pathMatch: 'full'
-  },
+  }
 ];
 
 @NgModule({

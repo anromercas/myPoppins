@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  url: '', 
+  url: '',
   firebase: {
     projectId: 'mypoppyns-1f746',
     appId: '1:780750116448:web:033f3de90deb669c7c1505',

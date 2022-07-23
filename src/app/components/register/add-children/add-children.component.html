@@ -1,0 +1,69 @@
+<ion-item class="ion-text-center item-steps">
+  <ion-label color="secondary">Paso 2 de 4</ion-label>
+</ion-item>
+
+
+<h3>Añade tu (primer) hijo</h3>
+<h6 class="ion-text-wrap">Para mostrarte todas las canguros y niñeras que mejor coinciden con su familia</h6>
+
+
+<ion-grid fixed>
+  <ion-row>
+    <ion-col size="6">
+      <ion-button (click)="onClickBoy()" expand="block">
+        Niño
+      <ion-icon name="checkmark-outline" slot="end" *ngIf="checkBoy"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button (click)="onClickGirl()" expand="block">
+        Niña
+      <ion-icon name="checkmark-outline" slot="end" *ngIf="checkGirl"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-item id="open-modal">
+  <ion-icon slot="start" name="calendar-outline" color="primary"></ion-icon>
+  <ion-label>F. Nacimiento</ion-label>
+  <ion-text >
+    {{ formattedString }}
+  </ion-text>
+</ion-item>
+
+<ion-modal trigger="open-modal">
+  <!-- <ng-template> -->
+    <ion-content>
+      <ion-datetime 
+      #datetime
+      first-day-of-week="1"
+      presentation="date"
+      [value]="dateValue" 
+      size="cover"
+      (ionChange)="dateChanged(datetime.value)"
+      >
+      </ion-datetime>
+    </ion-content>
+  <!-- </ng-template> -->
+</ion-modal>
+
+<ion-item lines="none" class="checkbox">
+  <ion-label>Estoy esperando un hijo</ion-label>
+  <ion-checkbox name="expectingChild" 
+                ngDefaultControl 
+                color="primary" 
+                slot="start" 
+                mode="ios" 
+                [(ngModel)]="expectingChild">
+  </ion-checkbox>
+</ion-item>
+
+<ion-button [disabled]="!checkBoy && !checkGirl" (click)="onClickNext()" color="warning" class="bold nextBtn" expand="block">
+  Siguiente
+  <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+</ion-button>
+<ion-button (click)="onClickPrev()" color="danger" class="bold" expand="block">
+  <ion-icon name="chevron-back-outline"></ion-icon>
+  Anterior
+</ion-button>

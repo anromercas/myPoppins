@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
-import { Gesture, GestureController, IonCard, Platform } from '@ionic/angular';
-import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer/ngx';
+import { GestureController, IonCard, Platform } from '@ionic/angular';
+import { Animation, AnimationController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -39,9 +39,11 @@ export class HomePage implements AfterViewInit{
   ];
   width: any;
   height: number;
+  cardArray: any;
 
   constructor(private platform: Platform, 
-              public gestureCtrl: GestureController,) { 
+              public gestureCtrl: GestureController,
+              private animationCtrl: AnimationController) { 
     platform.ready().then(() => {
       console.log('Width: ' + platform.width());
       console.log('Height: ' + platform.height());
@@ -51,18 +53,18 @@ export class HomePage implements AfterViewInit{
   }
 
   ngAfterViewInit() {
-    const cardArray = this.cards.toArray();
-    this.useTinderSwipe(cardArray);
+    this.cardArray = this.cards.toArray();
+    this.useTinderSwipe();
   }
 
-  useTinderSwipe( cardArray) {
-    for ( let i = 0; i < cardArray.length; i++ ) {
-      const card = cardArray[i];
+  useTinderSwipe() {
+    for ( let i = 0; i < this.cardArray.length; i++ ) {
+      const card = this.cardArray[i];
       const gesture = this.gestureCtrl.create({
         el: card.nativeElement,
         gestureName: 'my-gesture',
         onStart: ev => {
-
+          console.log(ev)
         },
         onMove: ev => {
           card.nativeElement.style.transform = `translateX(${ev.deltaX}px) rotate(${ev.deltaX / 10}deg)`;
@@ -73,7 +75,7 @@ export class HomePage implements AfterViewInit{
           if(ev.deltaX > 150) {
             card.nativeElement.style.transform = `translateX(${+this.platform.width() * 2}px) rotate(${ev.deltaX / 2}deg)`;
 
-          } else if ( ev.deltaX < -150 ) {
+          } else if (ev.deltaX < -150 ) {
             card.nativeElement.style.transform = `translateX(-${+this.platform.width() * 2}px) rotate(${ev.deltaX / 2}deg)`;
           } else {
             card.nativeElement.style.transform = '';
@@ -85,11 +87,49 @@ export class HomePage implements AfterViewInit{
   }
 
   swipeleft() {
+    
 
+    for ( let i = 0; i < this.cardArray.length; i++ ) {
+      const card = this.cardArray[i];
+      const animation: Animation = this.animationCtrl.create()
+            .addElement(card.nativeElement)
+            .duration(1000)
+            .fromTo('transform', 'translateX(0)', `translateX(${-100}px)`);
+      // animation.play();
+
+      const animation2: Animation = this.animationCtrl.create()
+            .addElement(card.nativeElement)
+            .duration(1000)
+            .to('rotate', `rotate(${-100 / 10}deg)`);
+            
+      animation2.play();
+
+      const gesture = this.gestureCtrl.create({
+        el: card.nativeElement,
+        gestureName: 'my-gesture',
+        onMove: ev => {
+          card.nativeElement.style.transform = `translateX(${ev.deltaX}px) rotate(${ev.deltaX / 10}deg)`;
+        },
+        onEnd: ev => {
+          card.nativeElement.style.transition = '.5s ease-out';
+
+          if(ev.deltaX > 150) {
+            card.nativeElement.style.transform = `translateX(${+this.platform.width() * 2}px) rotate(${ev.deltaX / 2}deg)`;
+
+          } else if (ev.deltaX < -150 ) {
+            card.nativeElement.style.transform = `translateX(-${+this.platform.width() * 2}px) rotate(${ev.deltaX / 2}deg)`;
+          } else {
+            card.nativeElement.style.transform = '';
+          }
+        }
+      });
+  
+      gesture.enable();
+    }
   }
 
   swiperight() {
-    
+
   }
 
 }

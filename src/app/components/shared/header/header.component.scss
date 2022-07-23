@@ -1,3 +1,12 @@
+ion-toolbar {
+    --ion-background-color: white;
+}
+
 ion-text {
     font-family: milestone;
+}
+
+ion-item {
+    --ion-background-color: transparent;
+    width: 500px !important;
 }

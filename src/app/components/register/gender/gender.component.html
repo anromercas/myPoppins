@@ -1,0 +1,24 @@
+<ion-item class="ion-text-center">
+  <ion-label color="secondary">Paso 1 de 4</ion-label>
+</ion-item>
+
+<h3>Soy:</h3>
+
+<ion-button (click)="onClickFather()" class="bold" expand="block">
+  {{  button1Text }}
+  <ion-icon name="checkmark-outline" slot="end" *ngIf="checkFather"></ion-icon>
+</ion-button>
+
+<ion-button (click)="onClickBabyMother()" class="bold" expand="block">
+  {{ button2Text }}
+  <ion-icon name="checkmark-outline" slot="end" *ngIf="checkMother"></ion-icon>
+</ion-button>
+
+<ion-button [disabled]="!checkFather && !checkMother" (click)="onClickNext()" color="warning" class="bold nextBtn" expand="block">
+  Siguiente
+  <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+</ion-button>
+<ion-button (click)="onClickPrev()" color="danger" class="bold" expand="block">
+  <ion-icon name="chevron-back-outline"></ion-icon>
+  Anterior
+</ion-button>

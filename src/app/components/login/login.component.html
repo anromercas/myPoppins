@@ -2,36 +2,45 @@
   <div class="flipper">
     <div class="front">
         <ion-card>
+          <ion-card-header class="ion-text-center">
+            <ion-item lines="none" class="ion-text-center" >
+              <ion-icon  size="large" name="diamond-outline"></ion-icon>
+              <ion-text color="dark" style="width: 100%;" >
+                <h1>My Poppins</h1>
+              </ion-text>
+            </ion-item>
+            <ion-card-title color="secondary">Acceso</ion-card-title>
+          </ion-card-header>
             <ion-card-content>
-              <form [formGroup]="loginForm" (ngSubmit)="login()">
+              <form [formGroup]="loginForm" (ngSubmit)="login()" *ngIf="loginForm">
         
                 <ion-item lines="none">
                   <ion-label position="stacked">Email</ion-label>
-                  <ion-input type="email" placeholder="john@doe.com" formControlName="email"></ion-input>
+                  <ion-input type="email" placeholder="contacto@mypoppins.com" formControlName="email" ngDefaultControl></ion-input>
                   <div *ngIf="(loginEmail.dirty || loginEmail.touched) && loginEmail.errors" class="errors">
-                    <span *ngIf="loginEmail.errors?.required">Email is required</span>
-                    <span *ngIf="loginEmail.errors?.email">Email is invalid</span>
+                    <span *ngIf="loginEmail.errors?.required">El Email es obligatorio</span>
+                    <span *ngIf="loginEmail.errors?.email">El Email es invalido</span>
                   </div>
                 </ion-item>
 
         
                 <ion-item lines="none">
-                  <ion-label position="stacked">Password</ion-label>
-                  <ion-input type="password" formControlName="password"></ion-input>
+                  <ion-label position="stacked">Contraseña</ion-label>
+                  <ion-input type="password" placeholder="******" formControlName="password" ngDefaultControl></ion-input>
                   <div *ngIf="(loginPassword.dirty || loginPassword.touched) && loginPassword.errors" class="errors">
-                    <span *ngIf="loginPassword.errors?.required">Password is required</span>
-                    <span *ngIf="loginPassword.errors?.minlength">Password needs to be 6 characters</span>
+                    <span *ngIf="loginPassword.errors?.required">La Contraseña es obligatoria</span>
+                    <span *ngIf="loginPassword.errors?.minlength">Mínimo 6 caracteres</span>
                   </div>
                 </ion-item>
 
                 <ion-button expand="block" type="submit" color="primary" [disabled]="!loginForm.valid"
                 class="ion-padding-horizontal ion-margin-vertical">
-              Sign in
+              Entrar
               </ion-button>
    
                 <ion-button expand="block" type="button" color="secondary" fill="outline"
                 class="ion-padding-horizontal ion-margin-vertical" (click)="toggleRegister()">
-              Create Account
+              Crear Cuenta
               </ion-button>
               </form>
             </ion-card-content>
@@ -40,32 +49,40 @@
 
     <div class="back">
         <ion-card>
-            <ion-card-header>
-              <ion-card-title>New Account</ion-card-title>
+            <ion-card-header class="ion-text-center">
+              <ion-card-title color="secondary">Crear cuenta</ion-card-title>
             </ion-card-header>
             <ion-card-content>
               <form [formGroup]="registerForm" (ngSubmit)="register()">
+
+                <ion-item lines="none">
+                  <ion-label position="stacked">Nombre</ion-label>
+                  <ion-input placeholder="Nombre" formControlName="name" ngDefaultControl></ion-input>
+                  <div *ngIf="(registerName.dirty || registerName.touched) && registerName.errors" class="errors">
+                    <span *ngIf="registerName.errors?.required">El Nombre es obligatorio</span>
+                  </div>
+                </ion-item>
+
+                <ion-item lines="none">
+                  <ion-label position="stacked">Apellidos</ion-label>
+                  <ion-input placeholder="Apellidos" formControlName="lastname" ngDefaultControl></ion-input>
+                  <div *ngIf="(registerName.dirty || registerName.touched) && registerName.errors" class="errors">
+                    <span *ngIf="registerName.errors?.required">Los Apellidos son obligatorios</span>
+                  </div>
+                </ion-item>
         
                 <ion-item lines="none">
                   <ion-label position="stacked">Email</ion-label>
-                  <ion-input type="email" placeholder="john@doe.com" formControlName="email"></ion-input>
+                  <ion-input type="email" placeholder="contacto@mypoppins.com" formControlName="email" ngDefaultControl></ion-input>
                   <div *ngIf="(registerEmail.dirty || registerEmail.touched) && registerEmail.errors" class="errors">
-                    <span *ngIf="registerEmail.errors?.required">Email is required</span>
-                    <span *ngIf="registerEmail.errors?.email">Email is invalid</span>
+                    <span *ngIf="registerEmail.errors?.required">El Email es obligatorio</span>
+                    <span *ngIf="registerEmail.errors?.email">El Email es invalido</span>
                   </div>
                 </ion-item>
         
                 <ion-item lines="none">
-                  <ion-label position="stacked">Name</ion-label>
-                  <ion-input placeholder="John" formControlName="name"></ion-input>
-                  <div *ngIf="(registerName.dirty || registerName.touched) && registerName.errors" class="errors">
-                    <span *ngIf="registerName.errors?.required">Name is required</span>
-                  </div>
-                </ion-item>
-        
-                <ion-item lines="none">
-                  <ion-label position="stacked">Password</ion-label>
-                  <ion-input type="password" formControlName="password"></ion-input>
+                  <ion-label position="stacked">Contraseña</ion-label>
+                  <ion-input type="password" placeholder="******" formControlName="password" ngDefaultControl></ion-input>
                   <div *ngIf="(registerPassword.dirty || registerPassword.touched) && registerPassword.errors" class="errors">
                     <span *ngIf="registerPassword.errors?.required">Password is required</span>
                     <span *ngIf="registerPassword.errors?.minlength">Password needs to be 6 characters</span>
@@ -74,18 +91,18 @@
         
                 <ion-button expand="block" type="submit" class="ion-padding-horizontal ion-margin-vertical"
                 [disabled]="!registerForm.valid">
-                  Register
+                  Registrar
                 </ion-button>
 
                 <ion-button expand="block" type="button" color="secondary" fill="clear"
                 class="ion-padding-horizontal ion-margin-vertical" (click)="toggleRegister()">
                 <ion-icon name="arrow-back" slot="start"></ion-icon>
-              Back to Login
+              Volver a Acceso
               </ion-button>
 
-              <ion-button expand="block" type="button" color="tertiary" fill="clear"
-                class="ion-padding-horizontal ion-margin-vertical" (click)="sendPasswordReset()">
-              Forgot Password?
+              <ion-button expand="block" type="button" color="dark" fill="clear"
+                class="ion-padding-horizontal ion-margin-vertical ion-text-wrap" (click)="sendPasswordReset()">
+              ¿Olvidaste tu contraseña?
               </ion-button>
               
               </form>

@@ -1,9 +1,25 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header></app-header>
 
-<ion-content>
 
+<ion-content class="ion-padding">
+  <div class="preview">
+    <ion-avatar (click)="changeImage()">
+      <img *ngIf="profile?.imageUrl; else placeholder_avatar;" [src]="profile.imageUrl" />
+      <ng-template #placeholder_avatar>
+        <div class="fallback">
+          <p>Subir Imagen</p>
+        </div>
+      </ng-template>
+    </ion-avatar>
+  </div>
+
+  <ion-button (click)="logout()" expand="block" >
+    <ion-icon name="log-out-outline"></ion-icon>
+    Cerrar sesión
+  </ion-button>
+
+  <ion-button (click)="deleteProfile()" color="danger" expand="block">
+    <ion-icon name="trash-outline"></ion-icon>
+    Eliminar cuenta
+  </ion-button>
 </ion-content>
